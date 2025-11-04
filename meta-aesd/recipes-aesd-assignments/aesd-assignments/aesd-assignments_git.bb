@@ -2,10 +2,10 @@
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda2f7b4f302"
 
-SRC_URI = "git://git@github.com/cu-ecen-aeld/assignments-3-and-later-Coreyboy1820.git;protocol=ssh;branch=master"
+SRC_URI = "git://git@github.com/cu-ecen-aeld/assignments-3-and-later-Coreyboy1820.git;protocol=ssh;branch=main"
 
 PV = "1.0+git${SRCPV}"
-SRCREV = "7592b659e03ff4271555f179f40b702425e7f4ea"
+SRCREV = "72e244a8cd48000def2d4a01dab5905e5ba052cc"
 
 S = "${WORKDIR}/git/server"
 
@@ -35,7 +35,10 @@ do_compile () {
 do_install () {
 
 	install -d ${D}${sysconfdir}/init.d
-	install -m ${S}/aesdsocket-start-stop ${D}${sysconfdir}/init.d
+	install -m 0755 ${S}/aesdsocket-start-stop ${D}${sysconfdir}/init.d
+
+	install -d ${D}${bindir}/
+	install -m 0777 ${S}/aesdsocket ${D}${bindir}/aesdsocket
 
 	# TODO: Install your binaries/scripts here.
 	# Be sure to install the target directory with install -d first
